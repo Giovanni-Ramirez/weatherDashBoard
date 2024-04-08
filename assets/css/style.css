@@ -1,3 +1,62 @@
 body {
     height: 100vh;
 }
+
+.thunder {
+    background-image: url(../images/bgStorm.jpg);
+    height: 100vh;
+    background-color: #cccccc;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.rain {
+    background-image: url(../images/bgRain.jpg);
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.snow {
+    background-image: url(../images/bgRain.jpg);
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.clear {
+    background-image: url(../images/bgSky.jpg);
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.clouds {
+    background-image: url(../images/bgClouds.jpg);
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.card {
+    backdrop-filter: blur(1rem);
+    box-shadow: 1.3rem 1.3rem 1.3rem rgba(0, 0, 0, 0.5);
+}
+
+.row div {
+    background-color: rgba(225,225,225, 0.1);
+}
+
+.container {
+    background-color: rgba(0,0,0, 0);
+}
