@@ -3,6 +3,7 @@ const weatherForm = document.querySelector("#weatherSearch");
 const todaysWeather = document.querySelector('#todaysWeather');
 const forecastEl = document.querySelector('#forecast');
 const body = document.querySelector("body");
+const pastSearch = document.querySelector("#storedCity");
 
 
 
@@ -10,6 +11,51 @@ function getWeather(event) {
     event.preventDefault();
     const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&units=imperial&appid=b6c220f04b8582f83e94b9971d818360`;
     const fiveDayWeather = `https://api.openweathermap.org/data/2.5/forecast?q=${city.value}&units=imperial&appid=b6c220f04b8582f83e94b9971d818360`;
+
+    fetch(weatherUrl)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            weatherSearchButton(data);
+            currentWeather(data);
+            bodyImg(data);
+        });
+
+
+    fetch(fiveDayWeather)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            fiveDayForecast(data);
+            weatherType(data);
+        });
+
+    city.value = '';
+}
+
+// Past Search buttons
+function weatherSearchButton (data) {
+    // Testing
+    // console.log(data);
+
+    const row =document.createElement('div');
+    row.setAttribute('class', 'col d-flex m-1');
+    const button = document.createElement('button');
+    button.textContent = data.name;
+    button.setAttribute("class", "btn btn-primary");
+    button.setAttribute('onClick', 'pastWeatherOnClick(event)')
+    
+    row.append(button)
+    pastSearch.append(row);
+}
+
+function pastWeatherOnClick (event) {
+    const city = event.target.textContent;
+
+    const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=b6c220f04b8582f83e94b9971d818360`;
+    const fiveDayWeather = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=b6c220f04b8582f83e94b9971d818360`;
 
     fetch(weatherUrl)
         .then(function (response) {
@@ -29,9 +75,8 @@ function getWeather(event) {
             fiveDayForecast(data);
             weatherType(data);
         });
-
-    city.value = '';
 }
+
 
 
 function currentWeather (data) {
@@ -127,12 +172,15 @@ function weatherType (weather) {
 
 // Body bg img
 function bodyImg (data) {
-    console.log(data.weather[0]);
+    // Testing
+    // console.log(data.weather[0]);
     const weatherMain = data.weather[0].main;
-    console.log(weatherMain);
+    // testing
+    // console.log(weatherMain);
     const weatherDescrition = data.weather[0].description;
-    console.log(weatherDescrition);
-    console.log("bodyImg was runned");
+    // testing
+    // console.log(weatherDescrition);
+    // console.log("bodyImg was runned");
 
     if (weatherMain == 'Thunderstorm') {
         body.setAttribute("class", "thunder");
